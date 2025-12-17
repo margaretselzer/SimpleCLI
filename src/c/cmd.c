@@ -255,10 +255,12 @@ cmd_error* cmd_parse(cmd* c, line_node* n) {
         switch (a->mode) {
             // Anonym, Template Arg -> value = value
             case ARG_POS:
+                // This is intended to fallthrough to the next case if prefix is '-'
                 if (prefix != '-') {
                     arg_set_value(a, w->str, w->len);
                     break;
                 }
+                /* fallthrough */
 
             // Default Arg -> value in next word
             case ARG_DEFAULT:
