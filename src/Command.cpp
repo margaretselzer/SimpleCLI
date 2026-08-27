@@ -32,6 +32,7 @@ Command::~Command() {
 }
 
 Command& Command::operator=(const Command& c) {
+    if (!persistent) cmd_destroy(cmdPointer);
     persistent = c.persistent;
     cmdPointer = c.cmdPointer;
     if (!persistent) cmdPointer = cmd_copy(c.cmdPointer);
@@ -40,6 +41,7 @@ Command& Command::operator=(const Command& c) {
 }
 
 Command& Command::operator=(Command&& c) {
+    if (!persistent) cmd_destroy(cmdPointer);
     persistent   = c.persistent;
     cmdPointer   = c.cmdPointer;
     c.cmdPointer = NULL;
