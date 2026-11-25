@@ -67,11 +67,11 @@ bool Argument::isRequired() const {
 }
 
 bool Argument::isOptional() const {
-    return !isRequired();
+    return argPointer && argPointer->req == ARG_OPT;
 }
 
 bool Argument::hasDefaultValue() const {
-    return isOptional();
+    return argPointer && argPointer->default_val != NULL;
 }
 
 bool Argument::isReq() const {
